@@ -4,7 +4,7 @@ from .person_routines import DefaultPersonRoutineAssignment
 from ..environment import Home, GroceryStore, Office, School, Hospital, RetailStore, HairSalon, Restaurant, Bar, \
     PandemicSimConfig, LocationConfig
 
-__all__ = ['town_config', 'small_town_config', 'test_config',
+__all__ = ['state_config','town_config', 'small_town_config', 'test_config',
            'tiny_town_config', 'medium_town_config',
            'above_medium_town_config']
 
@@ -14,6 +14,21 @@ A few references for the numbers selected:
 http://www.worldcitiescultureforum.com/data/number-of-restaurants-per-100.000-population (Austin)
 
 """
+
+state_config = PandemicSimConfig(
+    num_persons=100000,
+    location_configs=[
+        LocationConfig(Home, num=30000),
+        LocationConfig(GroceryStore, num=400, num_assignees=5, state_opts=dict(visitor_capacity=30)),
+        LocationConfig(Office, num=500, num_assignees=150, state_opts=dict(visitor_capacity=0)),
+        LocationConfig(School, num=1000, num_assignees=4, state_opts=dict(visitor_capacity=30)),
+        LocationConfig(Hospital, num=100, num_assignees=30, state_opts=dict(patient_capacity=10)),
+        LocationConfig(RetailStore, num=400, num_assignees=5, state_opts=dict(visitor_capacity=30)),
+        LocationConfig(HairSalon, num=400, num_assignees=3, state_opts=dict(visitor_capacity=5)),
+        LocationConfig(Restaurant, num=200, num_assignees=6, state_opts=dict(visitor_capacity=30)),
+        LocationConfig(Bar, num=200, num_assignees=5, state_opts=dict(visitor_capacity=30)),
+    ],
+    person_routine_assignment=DefaultPersonRoutineAssignment())
 
 town_config = PandemicSimConfig(
     num_persons=10000,

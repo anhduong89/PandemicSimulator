@@ -5,7 +5,7 @@ from matplotlib import pyplot as plt
 from numpy import max
 from tqdm import trange
 
-import pandemic_simulator as ps
+import pandemic_simulator_1 as ps
 
 
 def run(days: int, stage: int, days_per_interval: int) -> List[int]:

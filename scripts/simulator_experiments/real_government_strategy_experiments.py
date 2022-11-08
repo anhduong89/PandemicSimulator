@@ -2,7 +2,7 @@
 
 from matplotlib import pyplot as plt
 
-import pandemic_simulator as ps
+import pandemic_simulator_1 as ps
 
 
 def eval_government_strategies(experiment_name: str, opts: ps.sh.EvaluationOpts) -> None:

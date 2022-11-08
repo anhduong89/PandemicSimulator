@@ -1,9 +1,9 @@
-# Confidential, Copyright 2020, Sony Corporation of America, All rights reserved.
+"""duong mod edit PandemicSim"""
 
 from tqdm import trange
 
 import pandemic_simulator_1 as ps
-
+import csv
 
 def run_pandemic_gym_env() -> None:
     """Here we execute the gym envrionment wrapped simulator using austin regulations,
@@ -15,23 +15,29 @@ def run_pandemic_gym_env() -> None:
     ps.init_globals(seed=0)
 
     # select a simulator config
-    sim_config = ps.sh.small_town_config
+    sim_config = ps.sh.state_config
 
     # make env
-    env = ps.env.PandemicGymEnv.from_config(sim_config, pandemic_regulations=ps.sh.austin_regulations)
+    env = ps.env.PandemicGymEnv.from_config(sim_config, pandemic_regulations=ps.sh.swedish_regulations)
 
     # setup viz
     viz = ps.viz.GymViz.from_config(sim_config=sim_config)
 
     # run stage-0 action steps in the environment
     env.reset()
+    # opening the csv file in 'w+' mode
 
-    for _ in trange(100, desc='Simulating day'):
+    for _ in trange(200, desc='Simulating day'):
+        
         obs, reward, done, aux = env.step(action=0)  # here the action is the discrete regulation stage identifier
-        viz.record((obs, reward))
-
+        
+        # writing the data into the file
+        with open('data_age_group.csv', 'a+', newline='') as file:   
+            write = csv.writer(file)
+            write.writerows(env.output_as_group())
+        
     # generate plots
-    viz.plot()
+
 
 
 if __name__ == '__main__':

@@ -79,3 +79,5 @@ class PandemicObservation:
     def infection_summary_labels(self) -> Sequence[str]:
         """Return the label for each index in global_infection(or testing)_summary observation entry"""
         return [k.value for k in sorted_infection_summary]
+
+        

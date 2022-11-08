@@ -3,7 +3,7 @@ import itertools
 
 import pytest
 
-import pandemic_simulator as ps
+import pandemic_simulator_1 as ps
 
 
 @pytest.mark.parametrize(['x', 'n'],

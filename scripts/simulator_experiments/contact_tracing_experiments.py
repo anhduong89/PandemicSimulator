@@ -2,8 +2,8 @@
 
 from matplotlib import pyplot as plt
 
-from pandemic_simulator.environment import PandemicRegulation, PandemicSimOpts
-from pandemic_simulator.script_helpers import EvaluationOpts, evaluate_strategies, make_evaluation_plots
+from pandemic_simulator_1.environment import PandemicRegulation, PandemicSimOpts
+from pandemic_simulator_1.script_helpers import EvaluationOpts, evaluate_strategies, make_evaluation_plots
 
 if __name__ == '__main__':
     regulations = [

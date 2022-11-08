@@ -1,7 +1,7 @@
 # Confidential, Copyright 2020, Sony Corporation of America, All rights reserved.
 import copy
 
-import pandemic_simulator as ps
+import pandemic_simulator_1 as ps
 
 
 def test_location_and_person_reset() -> None:

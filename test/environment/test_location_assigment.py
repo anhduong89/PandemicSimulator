@@ -1,6 +1,6 @@
 # Confidential, Copyright 2020, Sony Corporation of America, All rights reserved.
 
-import pandemic_simulator as ps
+import pandemic_simulator_1 as ps
 
 
 def test_register_persons() -> None:

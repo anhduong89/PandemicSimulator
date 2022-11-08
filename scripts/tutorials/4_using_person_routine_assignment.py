@@ -3,8 +3,8 @@ from typing import Sequence, Type
 
 from tqdm import trange
 
-import pandemic_simulator as ps
-from pandemic_simulator.environment import Person, Location
+import pandemic_simulator_1 as ps
+from pandemic_simulator_1.environment import Person, Location
 
 
 def using_person_routine_assignment() -> None:

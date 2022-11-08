@@ -20,7 +20,7 @@ Note: There are unittests that check the household distribution under test/envir
 import numpy as np
 from matplotlib import pyplot as plt
 
-import pandemic_simulator as ps
+import pandemic_simulator_1 as ps
 
 
 def plot_household_distribution() -> None:

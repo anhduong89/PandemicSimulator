@@ -2,8 +2,8 @@
 
 from matplotlib import pyplot as plt
 
-from pandemic_simulator.data import H5DataLoader
-from pandemic_simulator.script_helpers import EvaluationOpts, evaluate_spread_rates, \
+from pandemic_simulator_1.data import H5DataLoader
+from pandemic_simulator_1.script_helpers import EvaluationOpts, evaluate_spread_rates, \
     make_evaluation_plots, evaluate_location_contact_rates, evaluate_social_gatherings, \
     make_evaluation_plots_from_data
 

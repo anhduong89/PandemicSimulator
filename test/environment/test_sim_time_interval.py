@@ -2,7 +2,7 @@
 
 import pytest
 
-from pandemic_simulator.environment import SimTime, SimTimeInterval
+from pandemic_simulator_1.environment import SimTime, SimTimeInterval
 
 
 def test_sim_time_interval_trigger_hour() -> None:

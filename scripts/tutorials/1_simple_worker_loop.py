@@ -2,7 +2,7 @@
 
 from tqdm import trange
 
-import pandemic_simulator as ps
+import pandemic_simulator_1 as ps
 
 
 def simple_worker_loop() -> None:

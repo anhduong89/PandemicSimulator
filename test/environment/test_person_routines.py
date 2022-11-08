@@ -1,8 +1,8 @@
 # Confidential, Copyright 2021, Sony Corporation of America, All rights reserved.
 from typing import Optional
 
-import pandemic_simulator as ps
-from pandemic_simulator.environment import SimTime, PersonState
+import pandemic_simulator_1 as ps
+from pandemic_simulator_1.environment import SimTime, PersonState
 
 
 def test_person_routine_with_status_sim_time_trigger() -> None:

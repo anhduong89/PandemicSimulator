@@ -2,8 +2,8 @@
 
 from matplotlib import pyplot as plt
 
-from pandemic_simulator.data import StageSchedule, H5DataLoader
-from pandemic_simulator.script_helpers import EvaluationOpts, evaluate_strategies, make_evaluation_plots_from_data
+from pandemic_simulator_1.data import StageSchedule, H5DataLoader
+from pandemic_simulator_1.script_helpers import EvaluationOpts, evaluate_strategies, make_evaluation_plots_from_data
 
 if __name__ == '__main__':
     name_to_strategy = {
