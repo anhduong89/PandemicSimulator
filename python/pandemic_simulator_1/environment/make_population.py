@@ -158,5 +158,14 @@ def make_population(sim_config: PandemicSimConfig) -> List[Person]:
                                home=home,
                                regulation_compliance_prob=sim_config.regulation_compliance_prob,
                                init_state=PersonState(current_location=home, risk=infection_risk(age))))
-
+        
+    for x in persons:
+        if x.id.age < 18:
+            x.group.group_num = 1
+        elif x.id.age >=18 and x.id.age < 50:
+            x.group.group_num = 2
+        elif x.id.age >=50 and x.id.age < 65:
+            x.group.group_num = 3
+        else:
+            x.group.group_num = 4
     return persons

@@ -15,7 +15,7 @@ def run_pandemic_gym_env() -> None:
     ps.init_globals(seed=0)
 
     # select a simulator config
-    sim_config = ps.sh.state_config
+    sim_config = ps.sh.small_town_config
 
     # make env
     env = ps.env.PandemicGymEnv.from_config(sim_config, pandemic_regulations=ps.sh.swedish_regulations)
@@ -25,17 +25,21 @@ def run_pandemic_gym_env() -> None:
 
     # run stage-0 action steps in the environment
     env.reset()
-    # opening the csv file in 'w+' mode
-
-    for _ in trange(200, desc='Simulating day'):
-        
+    fname='data_age_group.csv'
+    with open(fname, 'w+', newline='') as file: 
+        file.truncate()
+    # with f as file:   
+    #     write = csv.writer(file)
+    #     write.writerows(['unsusceptible', 'susceptible', 'exposed', 'pre_asymp', 'pre_symp', 'asymp', 'symp', 'needs_hospitalization', 'hospitalized', 'recovered', 'deceased'])   
+         
+    for _ in trange(3, desc='Simulating day'):      
         obs, reward, done, aux = env.step(action=0)  # here the action is the discrete regulation stage identifier
         
         # writing the data into the file
-        with open('data_age_group.csv', 'a+', newline='') as file:   
+        with open(fname, 'w+', newline='') as file:   
             write = csv.writer(file)
             write.writerows(env.output_as_group())
-        
+        exit()
     # generate plots
 
 

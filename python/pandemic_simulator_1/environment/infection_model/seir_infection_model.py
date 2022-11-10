@@ -15,6 +15,7 @@ __all__ = ['SEIRInfectionState', 'SEIRModel', 'SpreadProbabilityParams']
 
 
 class _SEIRLabel(Enum):
+    unsusceptible = 'unsusceptible'
     susceptible = 'susceptible'
     exposed = 'exposed'
     pre_asymp = 'pre_asymp'
@@ -109,6 +110,7 @@ class SEIRModel(InfectionModel):
 
     _model: _ModelDescription
     _seir_to_summary: Dict[_SEIRLabel, InfectionSummary] = {
+        _SEIRLabel.unsusceptible: InfectionSummary.NONE,
         _SEIRLabel.susceptible: InfectionSummary.NONE,
         _SEIRLabel.exposed: InfectionSummary.NONE,
         _SEIRLabel.pre_asymp: InfectionSummary.INFECTED,

@@ -5,7 +5,7 @@ from dataclasses import dataclass, field
 from typing import Optional, Sequence, List, Tuple
 
 from .contact_tracer import ContactTracer
-from .ids import PersonID, LocationID
+from .ids import PersonID, LocationID, GroupID
 from .infection_model import IndividualInfectionState, Risk
 from .pandemic_testing_result import PandemicTestResult
 from .pandemic_types import NoOP
@@ -34,7 +34,7 @@ class PersonState:
     avoid_location_types: List[type] = field(default_factory=list, init=False)
     not_infection_probability: float = field(default=1., init=False)
     not_infection_probability_history: List[Tuple[LocationID, float]] = field(default_factory=list, init=False)
-
+    
 
 class Person(ABC):
     """Class that implements a sim person automaton with a pre-defined policy."""
@@ -108,7 +108,13 @@ class Person(ABC):
         :return: Current state of the person.
         """
         pass
-
+    
+    @property
+    @abstractmethod
+    def group(self) -> GroupID:
+        pass
+    
     @abstractmethod
     def reset(self) -> None:
         """Reset person to its initial state."""
+    

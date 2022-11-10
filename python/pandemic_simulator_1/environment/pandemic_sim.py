@@ -370,7 +370,12 @@ class PandemicSim:
             person.receive_regulation(regulation)
 
         self._state.regulation_stage = regulation.stage
-
+    def impose_vaccination(self, action) -> None:
+        """
+        Vaccine distribution to group
+        change state of person that being vaccinate
+        """
+        
     @property
     def state(self) -> PandemicSimState:
         """

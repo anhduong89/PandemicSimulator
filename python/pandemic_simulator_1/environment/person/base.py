@@ -5,7 +5,7 @@ from typing import Optional, List, Sequence, cast
 
 import numpy as np
 
-from ..interfaces import Person, PersonID, PersonState, LocationID, Risk, Registry, PandemicRegulation, \
+from ..interfaces import Person, PersonID, PersonState, LocationID, GroupID, Risk, Registry, PandemicRegulation, \
     SimTime, NoOP, NOOP, SimTimeTuple, PandemicTestResult, ContactTracer, globals
 from ..location import Cemetery, Hospital
 
@@ -28,7 +28,7 @@ class BasePerson(Person):
 
     _regulation_compliance_prob: float
     _go_home: bool
-
+    # _group: GroupID
     def __init__(self,
                  person_id: PersonID,
                  home: LocationID,
@@ -58,7 +58,7 @@ class BasePerson(Person):
         self._cemetery_ids = list(self._registry.location_ids_of_type(Cemetery))
         self._hospital_ids = list(self._registry.location_ids_of_type(Hospital))
         self._go_home = False
-
+        self._group = GroupID(group_num = None)
     def enter_location(self, location_id: LocationID) -> bool:
         if location_id == self._home:
             self._go_home = False
@@ -77,7 +77,11 @@ class BasePerson(Person):
     @property
     def home(self) -> LocationID:
         return self._home
-
+    
+    @property
+    def group(self) -> GroupID:
+        return self._group
+    
     @property
     def at_home(self) -> bool:
         """Return True if the person is at home and False otherwise"""

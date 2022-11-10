@@ -128,9 +128,10 @@ class PandemicGymEnv(gym.Env):
     def last_reward(self) -> float:
         return self._last_reward
 
-    def step(self, action: int) -> Tuple[PandemicObservation, float, bool, Dict]:
+    def step(self, action: int, vaccine = None) -> Tuple[PandemicObservation, float, bool, Dict]:
         assert self.action_space.contains(action), "%r (%s) invalid" % (action, type(action))
-
+        
+        
         # execute the action if different from the current stage
         if action != self._last_observation.stage[-1, 0, 0]:  # stage has a TNC layout
             regulation = self._stage_to_regulation[action]
@@ -175,40 +176,45 @@ class PandemicGymEnv(gym.Env):
         pass
 #mod
     def output_as_group(self):
-        age_1 = age_2 = age_3 = age_4 = [0] * 10
+        age_1 = [0]*11
+        age_2 = [0]*11
+        age_3 = [0]*11
+        age_4 = [0]*11
         i = None
         for x in range(0, len(self._pandemic_sim._persons)):
             # return column number of personal state in SEIR model
-            if self._pandemic_sim._persons[x].state.infection_state.label == _SEIRLabel.susceptible:
+            if self._pandemic_sim._persons[x].state.infection_state.label == _SEIRLabel.unsusceptible:
                 i = 0
-            elif self._pandemic_sim._persons[x].state.infection_state.label == _SEIRLabel.exposed:
+            if self._pandemic_sim._persons[x].state.infection_state.label == _SEIRLabel.susceptible:
                 i = 1
+            elif self._pandemic_sim._persons[x].state.infection_state.label == _SEIRLabel.exposed:
+                i = 2
             elif self._pandemic_sim._persons[x].state.infection_state.label == _SEIRLabel.pre_asymp:
-                i= 2
+                i= 3
             elif self._pandemic_sim._persons[x].state.infection_state.label == _SEIRLabel.pre_symp:
-                i = 3
-            elif self._pandemic_sim._persons[x].state.infection_state.label == _SEIRLabel.asymp:
                 i = 4
-            elif self._pandemic_sim._persons[x].state.infection_state.label == _SEIRLabel.symp:
+            elif self._pandemic_sim._persons[x].state.infection_state.label == _SEIRLabel.asymp:
                 i = 5
-            elif self._pandemic_sim._persons[x].state.infection_state.label == _SEIRLabel.needs_hospitalization:
+            elif self._pandemic_sim._persons[x].state.infection_state.label == _SEIRLabel.symp:
                 i = 6
-            elif self._pandemic_sim._persons[x].state.infection_state.label == _SEIRLabel.hospitalized:
+            elif self._pandemic_sim._persons[x].state.infection_state.label == _SEIRLabel.needs_hospitalization:
                 i = 7
-            elif self._pandemic_sim._persons[x].state.infection_state.label == _SEIRLabel.recovered:
+            elif self._pandemic_sim._persons[x].state.infection_state.label == _SEIRLabel.hospitalized:
                 i = 8
-            elif self._pandemic_sim._persons[x].state.infection_state.label == _SEIRLabel.deceased:
+            elif self._pandemic_sim._persons[x].state.infection_state.label == _SEIRLabel.recovered:
                 i = 9
+            elif self._pandemic_sim._persons[x].state.infection_state.label == _SEIRLabel.deceased:
+                i = 10
             # plus 1 for age group, state of person
-            if i != None and self._pandemic_sim._persons[i].id.age < 18:
+            if (i != None and self._pandemic_sim._persons[x].id.age < 18):
                 age_1[i] += 1
-            elif i != None and self._pandemic_sim._persons[i].id.age >=18 and self._pandemic_sim._persons[i].id.age < 50:
+            elif (i != None and self._pandemic_sim._persons[x].id.age >=18 and self._pandemic_sim._persons[x].id.age < 50):
                 age_2[i] += 1
-            elif i != None and self._pandemic_sim._persons[i].id.age >=50 and self._pandemic_sim._persons[i].id.age < 65:
-                age_3[i] += 1                           
-            elif i != None and self._pandemic_sim._persons[i].id.age >= 65:
+            elif (i != None and self._pandemic_sim._persons[x].id.age >=50 and self._pandemic_sim._persons[x].id.age < 65):
+                age_3[i] += 1             
+            elif (i != None and self._pandemic_sim._persons[x].id.age >= 65):
                 age_4[i] += 1
-            i = None                
+            i = None         
         return [age_1, age_2, age_3, age_4]
        
                 
